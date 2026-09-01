@@ -1,7 +1,7 @@
 <?php
 // backend/cron/send_appointment_reminders.php
 // Send appointment reminders for tomorrow's jobs
-// Run daily at 9 AM: 0 9 * * * php /path/to/tristar-system/backend/cron/send_appointment_reminders.php
+// Run daily at 9 AM: 0 9 * * * php /var/www/html/backend/cron/send_appointment_reminders.php
 
 $lockFile = __DIR__ . '/appointment_reminders.lock';
 

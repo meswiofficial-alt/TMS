@@ -3,7 +3,7 @@
 
 class WhatsAppAdmin {
     constructor() {
-        this.apiBase = 'http://localhost/tristar-system/backend/api/whatsapp.php';
+        this.apiBase = '/backend/api/whatsapp.php';
         this.initialized = false;
     }
     
@@ -476,7 +476,7 @@ class WhatsAppAdmin {
      */
     async loadClientsForCompose() {
         try {
-            const response = await fetch('http://localhost/tristar-system/backend/api/clients.php');
+            const response = await fetch('/backend/api/clients.php');
             const result = await response.json();
             
             if (result.success) {

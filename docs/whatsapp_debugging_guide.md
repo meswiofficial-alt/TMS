@@ -110,13 +110,13 @@ if (typeof openModal === 'function' && openModal.length >= 2) {
 #### Test API Endpoints
 ```bash
 # Test clients API
-curl http://localhost/tristar-system/backend/api/clients.php
+curl /backend/api/clients.php
 
 # Test WhatsApp status
-curl http://localhost/tristar-system/backend/api/whatsapp.php?action=status
+curl /backend/api/whatsapp.php?action=status
 
 # Test queue message
-curl -X POST http://localhost/tristar-system/backend/api/whatsapp.php \
+curl -X POST /backend/api/whatsapp.php \
   -H "Content-Type: application/json" \
   -d '{"action":"queue_message","client_id":1,"template_name":"job_received"}'
 ```
@@ -211,7 +211,7 @@ whatsappAdmin.openComposeModal();
 ### If API Returns Error
 ```javascript
 // Test API directly in console
-fetch('/tristar-system/backend/api/clients.php')
+fetch('/backend/api/clients.php')
   .then(r => r.json())
   .then(d => console.log(d));
 ```

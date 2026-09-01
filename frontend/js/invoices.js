@@ -44,7 +44,7 @@ function openInvoiceModal(clientId = null) {
             
             showLoader();
             try {
-                const response = await fetch('http://localhost/tristar-system/backend/api/invoices.php', {
+                const response = await fetch('/backend/api/invoices.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -140,7 +140,7 @@ function collectInvoiceItems() {
 
 async function generateInvoicePDF(invoiceId) {
     try {
-        const response = await fetch('http://localhost/tristar-system/backend/api/invoices.php', {
+        const response = await fetch('/backend/api/invoices.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action: 'generate_pdf', invoice_id: invoiceId })
@@ -172,7 +172,7 @@ async function openInvoiceHistory() {
     setTimeout(async () => {
         const container = document.getElementById('invoiceHistoryContainer');
         try {
-            const response = await fetch('http://localhost/tristar-system/backend/api/invoices.php?action=list');
+            const response = await fetch('/backend/api/invoices.php?action=list');
             const result = await response.json();
             
             if (!result.success) {
@@ -204,7 +204,7 @@ async function openInvoiceHistory() {
             
             invoices.forEach(inv => {
                 const date = new Date(inv.issue_date).toLocaleDateString('en-KE', { year: 'numeric', month: 'short', day: 'numeric' });
-                const downloadUrl = `http://localhost/tristar-system/backend/api/invoices.php?action=download&id=${inv.id}`;
+                const downloadUrl = `/backend/api/invoices.php?action=download&id=${inv.id}`;
                 
                 html += `
                     <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">

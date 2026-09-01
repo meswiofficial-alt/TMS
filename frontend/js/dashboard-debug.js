@@ -32,7 +32,7 @@ function debugCheckElements() {
 async function debugTestApi() {
     console.log('Testing dashboard.php API...');
     try {
-        const response = await fetch('http://localhost/tristar-system/backend/api/dashboard.php');
+        const response = await fetch('/backend/api/dashboard.php');
         console.log('Response status:', response.status);
         const data = await response.json();
         console.log('Response data:', data);

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: tms-web
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: DB_HOST
+        value: db
+      - key: DB_PORT
+        value: 3306
+      - key: DB_NAME
+        value: tristar_garage
+      - key: DB_USER
+        value: tristar_user
+      - key: DB_PASS
+        value: tristar_pass
+      - key: WHATSAPP_PHONE_ID
+        value: demo
+      - key: WHATSAPP_ACCESS_TOKEN
+        value: demo_token
+      - key: WHATSAPP_WEBHOOK_TOKEN
+        value: tristar_webhook_2024

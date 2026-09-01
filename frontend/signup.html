@@ -383,7 +383,7 @@
             }
 
             try {
-                const response = await fetch(`http://localhost/tristar-system/backend/api/${endpoint}`, options);
+                const response = await fetch(`/backend/api/${endpoint}`, options);
                 const result = await response.json();
 
                 if (!response.ok) {

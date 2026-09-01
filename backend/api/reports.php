@@ -48,15 +48,15 @@ if ($method === 'POST') {
         switch ($format) {
             case 'xlsx':
                 generateExcel($data, $filePath . '.xlsx', $section);
-                $downloadUrl = 'http://localhost/tristar-system/backend/reports/' . $filename . '.xlsx';
+                $downloadUrl = '/backend/reports/' . $filename . '.xlsx';
                 break;
             case 'pdf':
                 generatePDF($data, $filePath . '.pdf', $section);
-                $downloadUrl = 'http://localhost/tristar-system/backend/reports/' . $filename . '.pdf';
+                $downloadUrl = '/backend/reports/' . $filename . '.pdf';
                 break;
             case 'docx':
                 generateWord($data, $filePath . '.docx', $section);
-                $downloadUrl = 'http://localhost/tristar-system/backend/reports/' . $filename . '.docx';
+                $downloadUrl = '/backend/reports/' . $filename . '.docx';
                 break;
         }
         

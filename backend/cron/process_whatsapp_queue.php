@@ -1,7 +1,7 @@
 <?php
 // backend/cron/process_whatsapp_queue.php
 // Process queued WhatsApp messages
-// Run every minute: * * * * * php /path/to/tristar-system/backend/cron/process_whatsapp_queue.php
+// Run every minute: * * * * * php /var/www/html/backend/cron/process_whatsapp_queue.php
 
 // Prevent concurrent execution
 $lockFile = __DIR__ . '/whatsapp_queue.lock';

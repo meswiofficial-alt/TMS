@@ -1,7 +1,7 @@
 <?php
 // fix_transactions_table.php
 // Run this file once to fix the transactions table schema
-// Access via browser: http://localhost/tristar-system/backend/api/fix_transactions_table.php
+// Access via browser: /backend/api/fix_transactions_table.php
 // DELETE THIS FILE AFTER RUNNING!
 
 require_once '../config/database.php';

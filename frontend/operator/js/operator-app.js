@@ -1,7 +1,7 @@
 // ===== OPERATOR APP INITIALIZATION =====
 // Verifies operator role and sets up operator-specific functionality
 
-const API_BASE = 'http://localhost/tristar-system/backend/api/';
+const API_BASE = '/backend/api/';
 let currentUser = null;
 
 // ===== Currency Formatter (Kenyan Shillings) =====

@@ -792,7 +792,7 @@ function openOperatorReportModal() {
         showLoader();
         
         try {
-            const response = await fetch('http://localhost/tristar-system/backend/api/reports.php', {
+            const response = await fetch('/backend/api/reports.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -865,7 +865,7 @@ function openOperatorInvoiceModal() {
             
             showLoader();
             try {
-                const response = await fetch('http://localhost/tristar-system/backend/api/invoices.php', {
+                const response = await fetch('/backend/api/invoices.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -929,7 +929,7 @@ function collectOpInvoiceItems() {
 
 async function generateOpInvoicePDF(invoiceId) {
     try {
-        const response = await fetch('http://localhost/tristar-system/backend/api/invoices.php', {
+        const response = await fetch('/backend/api/invoices.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action: 'generate_pdf', invoice_id: invoiceId })

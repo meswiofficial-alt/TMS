@@ -1,5 +1,5 @@
 // ===== API Configuration =====
-const API_BASE = 'http://localhost/tristar-system/backend/api/';
+const API_BASE = '/backend/api/';
 
 // ===== Global State =====
 let currentUser = null;

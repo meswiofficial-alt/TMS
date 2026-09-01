@@ -314,7 +314,7 @@
                     <span class="step-number">1</span>
                     <h4>Check Network Response in DevTools</h4>
                     <p>Open <code>F12</code> → <strong>Network</strong> tab → Filter by <code>XHR</code> → Click "Add Transaction" → Submit</p>
-                    <pre><code>// Expected: POST http://localhost/tristar-system/backend/api/transactions.php
+                    <pre><code>// Expected: POST /backend/api/transactions.php
 // Expected Status: 200 OK
 // Check Response tab for JSON payload</code></pre>
                 </div>
@@ -336,7 +336,7 @@
                     <span class="step-number">3</span>
                     <h4>Test API Directly</h4>
                     <pre><code>// Run in browser console
-fetch('http://localhost/tristar-system/backend/api/transactions.php', {
+fetch('/backend/api/transactions.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -871,7 +871,7 @@ function testModals() {
             // Test API
             log('Testing API connection...', 'info');
             try {
-                const response = await fetch('http://localhost/tristar-system/backend/api/transactions.php');
+                const response = await fetch('/backend/api/transactions.php');
                 const data = await response.json();
                 if (data.success) {
                     log(`  ✓ API connected. Found ${data.data.length} transactions`, 'success');
@@ -901,7 +901,7 @@ function testModals() {
             log(`Payload: ${JSON.stringify(testPayload)}`, 'info');
 
             try {
-                const response = await fetch('http://localhost/tristar-system/backend/api/transactions.php', {
+                const response = await fetch('/backend/api/transactions.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(testPayload)
@@ -926,7 +926,7 @@ function testModals() {
             log('Checking database connection...', 'info');
 
             try {
-                const response = await fetch('http://localhost/tristar-system/backend/api/dashboard.php');
+                const response = await fetch('/backend/api/dashboard.php');
                 const data = await response.json();
 
                 if (data.success) {

@@ -223,7 +223,7 @@ function createInvoice($conn, $input) {
         'success' => true,
         'invoice_id' => $invoiceId,
         'invoice_number' => $invoiceNumber,
-        'download_url' => 'http://localhost/tristar-system/backend/api/invoices.php?action=download&id=' . $invoiceId
+        'download_url' => '/backend/api/invoices.php?action=download&id=' . $invoiceId
     ]);
 }
 
@@ -292,7 +292,7 @@ function generateInvoicePDF($conn, $invoiceId) {
     
     echo json_encode([
         'success' => true,
-        'download_url' => 'http://localhost/tristar-system/backend/api/invoices.php?action=download&id=' . $invoiceId,
+        'download_url' => '/backend/api/invoices.php?action=download&id=' . $invoiceId,
         'file_path' => $filename . '.html'
     ]);
 }

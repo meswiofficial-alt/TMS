@@ -43,7 +43,7 @@ function openReportModal() {
         showLoader();
         
         try {
-            const response = await fetch('http://localhost/tristar-system/backend/api/reports.php', {
+            const response = await fetch('/backend/api/reports.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

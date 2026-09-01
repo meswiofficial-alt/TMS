@@ -1,7 +1,7 @@
 <?php
 // backend/cron/send_followups.php
 // Send follow-up messages for jobs completed yesterday
-// Run daily at 10 AM: 0 10 * * * php /path/to/tristar-system/backend/cron/send_followups.php
+// Run daily at 10 AM: 0 10 * * * php /var/www/html/backend/cron/send_followups.php
 
 $lockFile = __DIR__ . '/followups.lock';
 

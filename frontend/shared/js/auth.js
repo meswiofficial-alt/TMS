@@ -1,7 +1,7 @@
 // ===== SHARED AUTHENTICATION MODULE =====
 // Handles login and role-based redirection
 
-const API_BASE = 'http://localhost/tristar-system/backend/api/';
+const API_BASE = '/backend/api/';
 
 // Toast notification
 function showToast(message, isError = false) {

@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tristar-tms-app
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: tristar_garage
+      DB_USER: tristar_user
+      DB_PASS: tristar_pass
+      WHATSAPP_PHONE_ID: demo
+      WHATSAPP_ACCESS_TOKEN: demo_token
+      WHATSAPP_WEBHOOK_TOKEN: tristar_webhook_2024
+    volumes:
+      - app_uploads:/var/www/html/backend/invoices
+      - app_uploads_reports:/var/www/html/backend/reports
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/backend/api/dashboard.php"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  db:
+    image: mysql:8.0
+    container_name: tristar-tms-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: tristar_garage
+      MYSQL_USER: tristar_user
+      MYSQL_PASSWORD: tristar_pass
+      MYSQL_ROOT_PASSWORD: root_pass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./backend/schemas/database.sql:/docker-entrypoint-initdb.d/database.sql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  db_data:
+  app_uploads:
+  app_uploads_reports:
