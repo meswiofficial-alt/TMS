@@ -6,19 +6,15 @@ ENV APACHE_RUN_USER=www-data \
     APACHE_PID_FILE=/var/run/apache2/apache2.pid \
     APACHE_RUN_DIR=/var/run/apache2
 
+# Step 1: Install build dependencies and compile PHP extensions
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
     libzip-dev \
     libcurl4-openssl-dev \
-    zip \
-    unzip \
-    git \
-    curl \
-    netcat-openbsd \
-    default-mysql-client \
-    cron \
+    default-libmysqlclient-dev \
+    libonig-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
         gd \
@@ -30,6 +26,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
     && docker-php-ext-enable gd pdo_mysql mysqli mbstring zip bcmath curl \
     && a2enmod rewrite headers expires \
+    && rm -rf /var/lib/apt/lists/*
+
+# Step 2: Install runtime packages (separate layer for cache efficiency)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    netcat-openbsd \
+    default-mysql-client \
+    cron \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
