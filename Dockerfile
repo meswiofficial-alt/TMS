@@ -40,14 +40,19 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-COPY . /var/www/html
+# Copy frontend files to DocumentRoot
+COPY frontend/ /var/www/html/
+
+# Copy backend PHP files
+COPY backend/ /var/www/html/backend/
 
 COPY docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint
 RUN chmod +x /usr/local/bin/entrypoint
 
-RUN rm -f /var/www/html/Dockerfile /var/www/html/docker-compose.yml \
-    && rm -rf /var/www/html/.git /var/www/html/.kilo /var/www/html/docker \
+# Clean up Docker-specific files and set permissions
+RUN rm -f /var/www/html/docker-compose.yml \
+    && rm -rf /var/www/html/.git /var/www/html/.kilo \
     && find /var/www/html -type d -exec chmod 755 {} \; \
     && find /var/www/html -type f -exec chmod 644 {} \; \
     && chmod -R 775 /var/www/html/backend/api/ /var/www/html/backend/invoices/ \
