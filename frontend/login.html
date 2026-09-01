@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#e8edf2" media="(prefers-color-scheme: light)">
+    <title>Tristar Garage · Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="stylesheet" href="./css/neumorphic.css">
+    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="stylesheet" href="./css/mobile-responsive.css">
+    <style>
+        /* Login Page - Theme Aware */
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 40px 32px;
+            box-shadow: var(--neu-raised);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-accent);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-logo {
+            font-size: 3rem;
+            color: var(--accent-primary);
+            margin-bottom: 16px;
+        }
+
+        .login-header h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-heading);
+            margin-bottom: 8px;
+        }
+
+        .form-group label i {
+            color: var(--accent-primary);
+            margin-right: 8px;
+            width: 18px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--bg-input);
+            border: 2px solid transparent;
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            box-shadow: var(--neu-pressed);
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: var(--neu-pressed), 0 0 0 3px rgba(251, 191, 36, 0.15);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            border-radius: 14px;
+            margin-top: 8px;
+        }
+
+        .login-divider {
+            text-align: center;
+            margin: 28px 0 20px;
+            position: relative;
+        }
+
+        .login-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border-secondary);
+        }
+
+        .login-divider span {
+            background: var(--bg-card);
+            padding: 0 16px;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .demo-credentials {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .demo-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 14px;
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--neu-button);
+        }
+
+        .demo-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--neu-button-hover);
+        }
+
+        .demo-card i {
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .demo-card strong {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .demo-card span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .login-footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .login-footer a:hover {
+            color: var(--accent-primary);
+        }
+
+        .login-footer i {
+            margin-right: 6px;
+        }
+
+        .signup-prompt {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .signup-prompt span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .signup-prompt a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .signup-prompt a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 28px 20px;
+            }
+            .demo-credentials {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="globalLoader">
+        <div class="loader-content">
+            <div class="tms-text">TMS</div>
+            <div class="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">
+                    <i class="fas fa-warehouse"></i>
+                </div>
+                <h2>Tristar Garage</h2>
+                <p>Sign in to access your dashboard</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="neu-btn neu-btn-primary btn-login">
+                    <i class="fas fa-arrow-right-to-bracket"></i> Sign In
+                </button>
+            </form>
+
+            <div class="login-divider">
+                <span>Demo Credentials</span>
+            </div>
+
+            <div class="demo-credentials">
+                <div class="demo-card" onclick="fillDemo('admin')">
+                    <i class="fas fa-crown"></i>
+                    <strong>Admin</strong>
+                    <span>admin@tristar.com</span>
+                </div>
+                <div class="demo-card" onclick="fillDemo('operator')">
+                    <i class="fas fa-user"></i>
+                    <strong>Operator</strong>
+                    <span>operator@tristar.com</span>
+                </div>
+            </div>
+
+            <div class="signup-prompt">
+                <span>Don't have an account?</span>
+                <a href="./signup.html">Sign up</a>
+            </div>
+        </div>
+
+        <div class="login-footer">
+            <a href="./index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </div>
+
+    <script src="./shared/js/auth.js"></script>
+    <script src="./shared/js/theme.js"></script>
+    <script src="./shared/js/loader.js"></script>
+</body>
+</html>

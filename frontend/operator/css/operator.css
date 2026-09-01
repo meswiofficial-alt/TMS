@@ -1,0 +1,227 @@
+/* ===== OPERATOR DASHBOARD SPECIFIC STYLES ===== */
+
+/* Quick Actions */
+.quick-actions {
+    background: rgba(12, 18, 28, 0.5);
+    border-radius: 20px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.quick-actions h3 {
+    margin-bottom: 16px;
+    font-size: 1rem;
+    color: #9aa9bb;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quick-actions h3 i {
+    color: #fbbf24;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.action-btn {
+    background: rgba(26, 35, 47, 0.8);
+    border: 1px solid #2d3a48;
+    border-radius: 16px;
+    padding: 16px 12px;
+    color: #f0f4fa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.action-btn:hover {
+    background: rgba(251, 191, 36, 0.15);
+    border-color: #fbbf24;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.15);
+}
+
+.action-btn i {
+    font-size: 1.5rem;
+    color: #fbbf24;
+}
+
+.action-btn span {
+    font-weight: 500;
+}
+
+/* Operator Badge */
+.operator-badge {
+    background: rgba(251, 191, 36, 0.15);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.operator-badge i {
+    color: #fbbf24;
+}
+
+/* Badge Count */
+.badge-count {
+    background: rgba(251, 191, 36, 0.2);
+    padding: 2px 12px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    color: #fbbf24;
+    margin-left: 10px;
+}
+
+/* Section Title Enhancements */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-title h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* ===== MODALS ===== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: rgba(20, 28, 40, 0.95);
+    border-radius: 28px;
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #2a3848;
+}
+
+.modal-header h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.modal-header h2 i {
+    color: #fbbf24;
+    margin-right: 10px;
+}
+
+.modal-close {
+    font-size: 1.8rem;
+    color: #9aa9bb;
+    cursor: pointer;
+    transition: 0.2s;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: #fbbf24;
+    transform: rotate(90deg);
+}
+
+/* Modal Form Styles */
+.modal .form-group {
+    margin-bottom: 18px;
+}
+
+.modal .btn {
+    margin-top: 8px;
+}
+
+/* ===== TODAY'S TABLES ===== */
+.today-table {
+    font-size: 0.9rem;
+}
+
+.today-table td {
+    padding: 12px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ===== DASHBOARD FOOTER ===== */
+.dashboard-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #2a3848;
+    color: #6b7b8c;
+    font-size: 0.85rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+    .action-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .modal-content {
+        padding: 24px 20px;
+        margin: 10px;
+    }
+    
+    .quick-actions {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .action-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .action-btn {
+        padding: 12px 8px;
+        font-size: 0.75rem;
+    }
+    
+    .action-btn i {
+        font-size: 1.2rem;
+    }
+}

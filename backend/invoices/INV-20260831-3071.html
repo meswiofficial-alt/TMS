@@ -1,0 +1,30 @@
+<html><head><style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+        .company { font-size: 24px; font-weight: bold; color: #1a2332; }
+        .invoice-details { text-align: right; }
+        .invoice-number { font-size: 18px; font-weight: bold; color: #fbbf24; }
+        .client-info { margin: 20px 0; padding: 15px; background: #f5f5f5; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #1a2332; color: white; }
+        .total-row { font-weight: bold; background: #f5f5f5; }
+        .grand-total { font-size: 18px; font-weight: bold; color: #fbbf24; }
+    </style></head><body><div class="header">
+        <div class="company">Tristar Garage</div>
+        <div class="invoice-details">
+            <div class="invoice-number">INV-20260831-3071</div>
+            <div>Date: 2026-08-31</div>
+            <div>Due: 2026-09-30</div>
+        </div>
+    </div><div class="client-info">
+        <strong>Bill To:</strong><br>
+        Alice M.<br>
+        +1234567890<br>
+        alice@email.com
+    </div><table><thead><tr><th>Description</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr></thead><tbody><tr>
+            <td>carwash</td>
+            <td>1.00</td>
+            <td>KSh 200.00</td>
+            <td>KSh 200.00</td>
+        </tr><tr class="total-row"><td colspan="3">Subtotal</td><td>KSh 200.00</td></tr><tr class="total-row"><td colspan="3">Tax (10.00%)</td><td>KSh 20.00</td></tr><tr class="total-row grand-total"><td colspan="3">Total</td><td>KSh 220.00</td></tr></tbody></table></body></html>

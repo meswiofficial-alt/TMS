@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice - INV-20260901-1307</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
+        .header { display: flex; justify-content: space-between; margin-bottom: 30px; border-bottom: 2px solid #1a2332; padding-bottom: 20px; }
+        .company { font-size: 28px; font-weight: bold; color: #1a2332; }
+        .company-sub { color: #666; font-size: 14px; }
+        .invoice-details { text-align: right; }
+        .invoice-number { font-size: 20px; font-weight: bold; color: #fbbf24; }
+        .client-info { margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #1a2332; }
+        .client-info strong { color: #1a2332; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background: #1a2332; color: white; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .total-row { font-weight: bold; background: #e9ecef !important; }
+        .grand-total { font-size: 18px; font-weight: bold; color: #1a2332; background: #fff3cd !important; }
+        .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #666; font-size: 12px; }
+        @media print { body { margin: 0; } .no-print { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div class="company">TRISTAR GARAGE</div>
+            <div class="company-sub">Vehicle Service & Repair<br>Tel: +254 700 000 000<br>Nairobi, Kenya</div>
+        </div>
+        <div class="invoice-details">
+            <div class="invoice-number">INV-20260901-1307</div>
+            <div>Date: 01 Sep 2026</div>
+            <div>Due: 01 Oct 2026</div>
+        </div>
+    </div><div class="client-info">
+        <strong>BILL TO:</strong><br>
+        Alice M.<br>
+        +1234567890<br>
+        alice@email.com
+    </div><table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody><tr>
+            <td>1</td>
+            <td>carwash</td>
+            <td>1.00</td>
+            <td>KSh 200.00</td>
+            <td>KSh 200.00</td>
+        </tr><tr class="total-row"><td colspan="4" style="text-align:right">Subtotal</td><td>KSh 200.00</td></tr><tr class="total-row"><td colspan="4" style="text-align:right">Tax (10.00%)</td><td>KSh 20.00</td></tr><tr class="grand-total"><td colspan="4" style="text-align:right">TOTAL</td><td>KSh 220.00</td></tr></tbody></table><div class="footer">
+        <p>Thank you for choosing Tristar Garage!</p>
+        <p>Payment due within 30 days. M-Pesa Paybill: 123456</p>
+        <p><em>This is a computer generated invoice.</em></p>
+    </div>
+    <div class="no-print" style="margin-top:20px;text-align:center;">
+        <button onclick="window.print()" style="padding:10px 20px;background:#1a2332;color:white;border:none;border-radius:5px;cursor:pointer;">
+            Print Invoice
+        </button>
+    </div>
+</body></html>

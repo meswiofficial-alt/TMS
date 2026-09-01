@@ -1,0 +1,200 @@
+/* ===== SECTION TOGGLE SYSTEM ===== */
+/* Collapsible sections for Admin and Operator interfaces */
+
+/* Toggle Button */
+.section-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(26, 35, 47, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #9aa9bb;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.section-toggle-btn:hover {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.3);
+  color: #fbbf24;
+}
+
+.section-toggle-btn i {
+  font-size: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.section-toggle-btn.collapsed i {
+  transform: rotate(-90deg);
+}
+
+/* Section Container */
+.collapsible-section {
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease,
+              margin 0.3s ease,
+              padding 0.3s ease;
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.collapsible-section.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Section Header with Toggle */
+.section-header-with-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header-with-toggle h3,
+.section-header-with-toggle h4 {
+  margin-bottom: 0;
+}
+
+/* Stats Grid Toggle */
+.stats-grid-wrapper {
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease;
+  max-height: 500px;
+  opacity: 1;
+}
+
+.stats-grid-wrapper.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+}
+
+/* Quick Actions Toggle */
+.quick-actions-wrapper {
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease;
+  max-height: 300px;
+  opacity: 1;
+}
+
+.quick-actions-wrapper.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* WhatsApp Section Toggle */
+.wa-dashboard-container {
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease,
+              margin 0.3s ease,
+              padding 0.3s ease;
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.wa-dashboard-container.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Tab Content Toggle */
+.tab-pane {
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease;
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.tab-pane.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* Activity History Toggle */
+.activity-section {
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease,
+              margin 0.3s ease,
+              padding 0.3s ease;
+  max-height: 1500px;
+  opacity: 1;
+}
+
+.activity-section.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Global Toggle All Button */
+.toggle-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #1a2332 0%, #2d3a48 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #f0f4fa;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.toggle-all-btn:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #1a2332;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+}
+
+.toggle-all-btn i {
+  transition: transform 0.3s ease;
+}
+
+.toggle-all-btn.expand-all i {
+  transform: rotate(180deg);
+}
+
+/* Section divider for collapsed sections */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  margin: 16px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-toggle-btn {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .toggle-all-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}

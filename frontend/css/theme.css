@@ -1,0 +1,83 @@
+/* ===== THEME SYSTEM WITH CSS CUSTOM PROPERTIES =====
+   Light and Dark mode support with neumorphic design
+   Usage: Add data-theme="light" or data-theme="dark" to <html> or <body> */
+
+:root,
+[data-theme="dark"] {
+    /* Dark Theme (Default) */
+    --bg-primary: #0b0e14;
+    --bg-secondary: #141c28;
+    --bg-tertiary: #1a232f;
+    --bg-card: rgba(20, 28, 40, 0.85);
+    --bg-input: #1a232f;
+    --bg-hover: #1f2a38;
+
+    --text-primary: #f0f4fa;
+    --text-secondary: #9aa9bb;
+    --text-muted: #6b7b8c;
+    --text-heading: #cbd5e1;
+
+    --accent-primary: #fbbf24;
+    --accent-secondary: #f59e0b;
+    --accent-success: #22c55e;
+    --accent-danger: #ef4444;
+    --accent-warning: #f97316;
+    --accent-info: #3b82f6;
+
+    --border-primary: #2d3a48;
+    --border-secondary: #2a3848;
+    --border-accent: rgba(251, 191, 36, 0.2);
+
+    /* Neumorphic Shadows - Dark */
+    --neu-shadow-light: rgba(255, 255, 255, 0.05);
+    --neu-shadow-dark: rgba(0, 0, 0, 0.5);
+    --neu-raised: 6px 6px 12px rgba(0, 0, 0, 0.5), -6px -6px 12px rgba(255, 255, 255, 0.03);
+    --neu-pressed: inset 4px 4px 8px rgba(0, 0, 0, 0.5), inset -4px -4px 8px rgba(255, 255, 255, 0.03);
+    --neu-button: 4px 4px 8px rgba(0, 0, 0, 0.4), -4px -4px 8px rgba(255, 255, 255, 0.04);
+    --neu-button-hover: 2px 2px 4px rgba(0, 0, 0, 0.4), -2px -2px 4px rgba(255, 255, 255, 0.04);
+
+    --glass-bg: rgba(20, 28, 40, 0.75);
+    --toast-bg: #1a232f;
+    --modal-bg: #141c28;
+    --table-stripe: rgba(255, 255, 255, 0.02);
+    --shadow-glow: rgba(251, 191, 36, 0.2);
+}
+
+[data-theme="light"] {
+    --bg-primary: #e8edf2;
+    --bg-secondary: #f5f7fa;
+    --bg-tertiary: #ffffff;
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --bg-input: #f0f3f7;
+    --bg-hover: #e2e8f0;
+
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --text-heading: #334155;
+
+    --accent-primary: #d97706;
+    --accent-secondary: #b45309;
+    --accent-success: #16a34a;
+    --accent-danger: #dc2626;
+    --accent-warning: #ea580c;
+    --accent-info: #2563eb;
+
+    --border-primary: #d1d5db;
+    --border-secondary: #e5e7eb;
+    --border-accent: rgba(217, 119, 6, 0.3);
+
+    /* Neumorphic Shadows - Light */
+    --neu-shadow-light: rgba(255, 255, 255, 0.8);
+    --neu-shadow-dark: rgba(148, 163, 184, 0.5);
+    --neu-raised: 6px 6px 12px rgba(148, 163, 184, 0.4), -6px -6px 12px rgba(255, 255, 255, 0.9);
+    --neu-pressed: inset 4px 4px 8px rgba(148, 163, 184, 0.3), inset -4px -4px 8px rgba(255, 255, 255, 0.7);
+    --neu-button: 4px 4px 8px rgba(148, 163, 184, 0.35), -4px -4px 8px rgba(255, 255, 255, 0.8);
+    --neu-button-hover: 2px 2px 4px rgba(148, 163, 184, 0.3), -2px -2px 4px rgba(255, 255, 255, 0.8);
+
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --toast-bg: #ffffff;
+    --modal-bg: #ffffff;
+    --table-stripe: rgba(0, 0, 0, 0.02);
+    --shadow-glow: rgba(217, 119, 6, 0.15);
+}

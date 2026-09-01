@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tristar Garage · Stat Cards Component Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="stylesheet" href="./css/neumorphic.css">
+    <link rel="stylesheet" href="./css/glass-cards.css">
+    <style>
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+            transition: background 0.3s ease;
+        }
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .demo-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .demo-title h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .demo-title p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .demo-section {
+            margin-bottom: 50px;
+        }
+        .demo-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--text-heading);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-title">
+            <h1>Stat Cards Component System</h1>
+            <p>Glassmorphic design with SVG sparklines and color themes</p>
+        </div>
+
+        <div class="demo-section">
+            <h2>Dashboard Metrics</h2>
+            <div class="glass-grid">
+                <!-- Clients - Blue -->
+                <div class="glass-card blue">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <span class="card-timestamp">Total</span>
+                    </div>
+                    <div class="card-primary">1,248</div>
+                    <div class="card-secondary">
+                        Active clients
+                        <span class="trend up"><i class="fas fa-arrow-up"></i> 12%</span>
+                    </div>
+                    <div class="card-sparkline">
+                        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="sparklineBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                            <path class="sparkline-fill" d="M0,45 L25,40 L50,35 L75,38 L100,30 L125,25 L150,28 L175,20 L200,15 L200,60 L0,60 Z" />
+                            <path class="sparkline-stroke" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,45 L25,40 L50,35 L75,38 L100,30 L125,25 L150,28 L175,20 L200,15" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Revenue - Green -->
+                <div class="glass-card green">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <span class="card-timestamp">Today</span>
+                    </div>
+                    <div class="card-primary">$24,580</div>
+                    <div class="card-secondary">
+                        Daily revenue
+                        <span class="trend up"><i class="fas fa-arrow-up"></i> 24%</span>
+                    </div>
+                    <div class="card-sparkline">
+                        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="sparklineGreen" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                            <path class="sparkline-fill" d="M0,55 L25,50 L50,45 L75,40 L100,32 L125,28 L150,22 L175,18 L200,10 L200,60 L0,60 Z" />
+                            <path class="sparkline-stroke" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,55 L25,50 L50,45 L75,40 L100,32 L125,28 L150,22 L175,18 L200,10" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Growth - Orange -->
+                <div class="glass-card orange">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span class="card-timestamp">Monthly</span>
+                    </div>
+                    <div class="card-primary">+18.5%</div>
+                    <div class="card-secondary">
+                        Growth rate
+                        <span class="trend up"><i class="fas fa-arrow-up"></i> 3.2%</span>
+                    </div>
+                    <div class="card-sparkline">
+                        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="sparklineOrange" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#f97316;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#f97316;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                            <path class="sparkline-fill" d="M0,50 L25,48 L50,42 L75,45 L100,38 L125,35 L150,30 L175,25 L200,18 L200,60 L0,60 Z" />
+                            <path class="sparkline-stroke" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,50 L25,48 L50,42 L75,45 L100,38 L125,35 L150,30 L175,25 L200,18" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Engagement - Purple -->
+                <div class="glass-card purple">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <span class="card-timestamp">Avg</span>
+                    </div>
+                    <div class="card-primary">94.2%</div>
+                    <div class="card-secondary">
+                        Customer satisfaction
+                        <span class="trend up"><i class="fas fa-arrow-up"></i> 2.1%</span>
+                    </div>
+                    <div class="card-sparkline">
+                        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="sparklinePurple" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#a855f7;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#a855f7;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                            <path class="sparkline-fill" d="M0,50 L25,45 L50,42 L75,35 L100,38 L125,32 L150,28 L175,22 L200,18 L200,60 L0,60 Z" />
+                            <path class="sparkline-stroke" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,50 L25,45 L50,42 L75,35 L100,38 L125,32 L150,28 L175,22 L200,18" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Alerts - Red -->
+                <div class="glass-card red">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <span class="card-timestamp">Active</span>
+                    </div>
+                    <div class="card-primary">7</div>
+                    <div class="card-secondary">
+                        Low stock alerts
+                        <span class="trend down"><i class="fas fa-exclamation"></i> Action needed</span>
+                    </div>
+                    <div class="card-sparkline">
+                        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="sparklineRed" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                            <path class="sparkline-fill" d="M0,30 L25,35 L50,32 L75,38 L100,42 L125,40 L150,45 L175,48 L200,50 L200,60 L0,60 Z" />
+                            <path class="sparkline-stroke" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,30 L25,35 L50,32 L75,38 L100,42 L125,40 L150,45 L175,48 L200,50" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Jobs - Cyan -->
+                <div class="glass-card cyan">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <span class="card-timestamp">Active</span>
+                    </div>
+                    <div class="card-primary">23</div>
+                    <div class="card-secondary">
+                        Pending jobs
+                        <span class="trend up"><i class="fas fa-clock"></i> In progress</span>
+                    </div>
+                    <div class="card-sparkline">
+                        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="sparklineCyan" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                            <path class="sparkline-fill" d="M0,50 L25,45 L50,48 L75,40 L100,35 L125,38 L150,30 L175,25 L200,20 L200,60 L0,60 Z" />
+                            <path class="sparkline-stroke" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,50 L25,45 L50,48 L75,40 L100,35 L125,38 L150,30 L175,25 L200,20" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Additional Color Variants</h2>
+            <div class="glass-grid">
+                <!-- Pink Theme -->
+                <div class="glass-card pink">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="card-timestamp">Reviews</span>
+                    </div>
+                    <div class="card-primary">4.9</div>
+                    <div class="card-secondary">
+                        Average rating
+                        <span class="trend up"><i class="fas fa-arrow-up"></i> 0.3</span>
+                    </div>
+                    <div class="card-sparkline">
+                        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="sparklinePink" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ec4899;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#ec4899;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                            <path class="sparkline-fill" d="M0,48 L25,45 L50,40 L75,38 L100,35 L125,30 L150,28 L175,25 L200,20 L200,60 L0,60 Z" />
+                            <path class="sparkline-stroke" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,48 L25,45 L50,40 L75,38 L100,35 L125,30 L150,28 L175,25 L200,20" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Gold Theme -->
+                <div class="glass-card gold">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <span class="card-timestamp">Monthly</span>
+                    </div>
+                    <div class="card-primary">$142K</div>
+                    <div class="card-secondary">
+                        Monthly balance
+                        <span class="trend up"><i class="fas fa-arrow-up"></i> 18%</span>
+                    </div>
+                    <div class="card-sparkline">
+                        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="sparklineGold" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                            <path class="sparkline-fill" d="M0,55 L25,50 L50,48 L75,42 L100,38 L125,32 L150,28 L175,22 L200,15 L200,60 L0,60 Z" />
+                            <path class="sparkline-stroke" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,55 L25,50 L50,48 L75,42 L100,38 L125,32 L150,28 L175,22 L200,15" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./shared/js/theme.js"></script>
+</body>
+</html>

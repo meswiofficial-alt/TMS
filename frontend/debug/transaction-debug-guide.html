@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Debugging Guide - Tristar Garage</title>
+    <style>
+        :root {
+            --bg-primary: #0a0f19;
+            --bg-secondary: #141c28;
+            --bg-tertiary: #1a2332;
+            --text-primary: #f0f4fa;
+            --text-secondary: #9aa9bb;
+            --accent: #fbbf24;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --warning: #f97316;
+            --info: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section h2 {
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2 .icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(251, 191, 36, 0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--info);
+        }
+
+        .category.warning { border-left-color: var(--warning); }
+        .category.danger { border-left-color: var(--danger); }
+        .category.success { border-left-color: var(--success); }
+
+        .category h3 {
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .category h3 .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--accent);
+        }
+
+        .step {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 8px;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-right: 8px;
+        }
+
+        .step h4 {
+            display: inline;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 4px;
+            padding-left: 32px;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 8px 0;
+            font-size: 0.85rem;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-primary);
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+        .test-protocol {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .test-protocol h4 {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .button-test {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .button-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .button-item .status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+        }
+
+        .button-item .status.pass { background: var(--success); }
+        .button-item .status.fail { background: var(--danger); }
+
+        .quick-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-code {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .error-code.client { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .error-code.server { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .error-code.auth { background: rgba(249, 115, 22, 0.2); color: #f97316; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Transaction Debugging Guide</h1>
+        <p class="subtitle">Systematic troubleshooting for "Add Transaction" functionality in Tristar Garage Management System</p>
+
+        <!-- Section 1: API Response Errors -->
+        <div class="section">
+            <h2><span class="icon">📡</span> Category 1: API Response Errors</h2>
+            
+            <div class="category">
+                <h3>HTTP Status Code Failures <span class="badge">Backend</span></h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Check Network Response in DevTools</h4>
+                    <p>Open <code>F12</code> → <strong>Network</strong> tab → Filter by <code>XHR</code> → Click "Add Transaction" → Submit</p>
+                    <pre><code>// Expected: POST http://localhost/tristar-system/backend/api/transactions.php
+// Expected Status: 200 OK
+// Check Response tab for JSON payload</code></pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Common HTTP Error Codes</h4>
+                    <table>
+                        <tr><th>Code</th><th>Meaning</th><th>Solution</th></tr>
+                        <tr><td><span class="error-code client">400</span></td><td>Bad Request</td><td>Check request payload format matches API expectations</td></tr>
+                        <tr><td><span class="error-code client">403</span></td><td>Forbidden</td><td>Verify user role has transaction creation permission</td></tr>
+                        <tr><td><span class="error-code client">404</span></td><td>Not Found</td><td>Verify transactions.php exists in backend/api/</td></tr>
+                        <tr><td><span class="error-code server">500</span></td><td>Server Error</td><td>Check PHP error logs in XAMPP</td></tr>
+                        <tr><td><span class="error-code server">503</span></td><td>Service Unavailable</td><td>Verify MySQL is running in XAMPP</td></tr>
+                    </table>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Test API Directly</h4>
+                    <pre><code>// Run in browser console
+fetch('http://localhost/tristar-system/backend/api/transactions.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        type: 'income',
+        category: 'Service',
+        amount: 1500.00,
+        payment_method: 'cash',
+        description: 'Test transaction',
+        transaction_date: '2024-01-15'
+    })
+})
+.then(r => r.json())
+.then(d => console.log('API Response:', d))
+.catch(e => console.error('API Error:', e));</code></pre>
+                </div>
+            </div>
+
+            <div class="category warning">
+                <h3>Payload Mismatches <span class="badge">Frontend</span></h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Verify Request Payload Structure</h4>
+                    <pre><code>// Expected payload from transactions.js (line 177):
+{
+    type: "income" | "expense",      // Required
+    category: string,                 // Required - must be valid category
+    amount: number,                   // Required - must be > 0
+    payment_method: "cash" | "bank",  // Optional - defaults to "cash"
+    description: string,              // Optional - defaults to ""
+    reference: string,                // Optional - defaults to ""
+    transaction_date: "YYYY-MM-DD",   // Required - defaults to today
+    notes: string                     // Optional - defaults to ""
+}</code></pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Check Form Data Collection</h4>
+                    <p>The <code>collectFormData()</code> function in <code>app.js</code> collects data using <code>data-field</code> attributes:</p>
+                    <pre><code>// Verify all modal inputs have data-field attributes:
+&lt;select id="m-type" data-field="type"&gt;          ✓
+&lt;select id="m-category" data-field="category"&gt;  ✓
+&lt;input id="m-amount" data-field="amount"&gt;        ✓
+&lt;input id="m-date" data-field="transaction_date"&gt; ✓</code></pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Inspect Actual Payload</h4>
+                    <pre><code>// Add temporary debug in showAddTransaction() before apiCall:
+openModal('...', content, async (data) => {
+    console.log('Payload being sent:', data);  // ADD THIS
+    const result = await apiCall('transactions.php', 'POST', data);
+    // ...
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Database Constraints -->
+        <div class="section">
+            <h2><span class="icon">🗄️</span> Category 2: Database Constraints</h2>
+            
+            <div class="category danger">
+                <h3>Schema Violations <span class="badge">MySQL</span></h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Verify Table Structure</h4>
+                    <pre><code>-- Run in phpMyAdmin SQL tab:
+DESCRIBE transactions;
+
+-- Expected output:
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| type     | enum        | NO   |     | NULL    |                |
+| category | varchar(50) | NO   |     | NULL    |                |
+| amount   | decimal(10,2)| NO  |     | NULL    |                |
+| ...      | ...         | ...  | ... | ...     | ...            |
++----------+-------------+------+-----+---------+----------------+</code></pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Check ENUM Values</h4>
+                    <pre><code>-- Verify accepted ENUM values:
+SELECT COLUMN_TYPE 
+FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE TABLE_NAME = 'transactions' AND COLUMN_NAME = 'type';
+
+-- Expected: enum('income','expense')
+
+-- Check payment_method:
+SELECT COLUMN_TYPE 
+FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE TABLE_NAME = 'transactions' AND COLUMN_NAME = 'payment_method';
+
+-- Expected: enum('cash','bank')</code></pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Common Constraint Violations</h4>
+                    <table>
+                        <tr><th>Error</th><th>Cause</th><th>Fix</th></tr>
+                        <tr><td><code>Data truncated for column 'type'</code></td><td>Value not in ENUM list</td><td>Use 'income' or 'expense' only</td></tr>
+                        <tr><td><code>Incorrect decimal value</code></td><td>Non-numeric amount</td><td>Validate amount is numeric</td></tr>
+                        <tr><td><code>Column cannot be null</code></td><td>Missing required field</td><td>Provide all NOT NULL fields</td></tr>
+                        <tr><td><code>Out of range value</code></td><td>Amount exceeds DECIMAL(10,2)</td><td>Limit to 99999999.99</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="category warning">
+                <h3>Foreign Key Conflicts <span class="badge">Referential</span></h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Verify Foreign Key References</h4>
+                    <pre><code>-- If providing client_id, verify client exists:
+SELECT id FROM clients WHERE id = [your_client_id];
+
+-- If providing worker_id, verify worker exists:
+SELECT id FROM workers WHERE id = [your_worker_id];
+
+-- Note: Both fields are nullable in schema, so NULL is acceptable</code></pre>
+                </div>
+            </div>
+
+            <div class="category">
+                <h3>Enable MySQL Query Logging <span class="badge">Debug</span></h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Enable General Query Log</h4>
+                    <pre><code>-- In phpMyAdmin or MySQL CLI:
+SET GLOBAL general_log = 'ON';
+SET GLOBAL log_output = 'TABLE';
+
+-- View logged queries:
+SELECT * FROM mysql.general_log WHERE command_type = 'Query' ORDER BY event_time DESC LIMIT 10;
+
+-- Don't forget to disable after debugging:
+SET GLOBAL general_log = 'OFF';</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Frontend Validation Logic -->
+        <div class="section">
+            <h2><span class="icon">🖥️</span> Category 3: Frontend Validation Logic</h2>
+            
+            <div class="category warning">
+                <h3>Modal Form Validation <span class="badge">JavaScript</span></h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Check collectFormData() Function</h4>
+                    <pre><code>// Located in app.js (line 108-129)
+function collectFormData() {
+    const inputs = document.querySelectorAll('#modalContainer input, #modalContainer select, #modalContainer textarea');
+    const data = {};
+    let valid = true;
+    
+    inputs.forEach(input => {
+        const name = input.getAttribute('data-field');
+        if (name) {
+            // Check required validation
+            if (input.hasAttribute('required') && !input.value.trim()) {
+                valid = false;
+                input.style.borderColor = '#ef4444';
+            }
+            let value = input.value.trim();
+            if (input.type === 'number') value = parseFloat(value) || 0;
+            data[name] = value;
+        }
+    });
+    
+    return valid ? data : null;  // Returns null if validation fails
+}</code></pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Debug Form Submission</h4>
+                    <pre><code>// Add debug logging to showAddTransaction() callback:
+openModal('...', content, async (data) => {
+    console.log('Form data collected:', data);
+    console.log('Form data is null?', data === null);
+    
+    if (!data) {
+        console.error('Validation failed - form data is null');
+        return;
+    }
+    
+    const result = await apiCall('transactions.php', 'POST', data);
+    console.log('API result:', result);
+    
+    if (result.success) {
+        showToast('Transaction added!');
+        loadTransactions(true);
+        loadDashboardStats();
+    } else {
+        console.error('API returned failure:', result.error);
+    }
+});</code></pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Verify Category Dropdown Population</h4>
+                    <pre><code>// Check if categories are populated after modal opens:
+setTimeout(() => {
+    const catSelect = document.getElementById('m-category');
+    console.log('Category options:', catSelect?.options?.length);
+    console.log('Selected value:', catSelect?.value);
+}, 200);
+
+// If categories are empty, updateCategories() may not be running
+// Expected: INCOME_CATEGORIES = ['Service', 'Parts Sale', 'Consultation', 'Other Income']
+// Expected: EXPENSE_CATEGORIES = ['Salary', 'Parts Purchase', 'Maintenance', 'Utilities', 'Rent', 'Other Expense']</code></pre>
+                </div>
+            </div>
+
+            <div class="category danger">
+                <h3>JavaScript Errors <span class="badge">Console</span></h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Check for Silent Errors</h4>
+                    <pre><code>// Common errors to look for:
+// 1. "Cannot read property 'value' of null" - Element not found
+// 2. "formatKSh is not defined" - Function not loaded
+// 3. "apiCall is not a function" - Script loading order issue
+
+// Verify all required functions are available:
+console.log('apiCall:', typeof apiCall === 'function');
+console.log('formatKSh:', typeof formatKSh === 'function');
+console.log('showAddTransaction:', typeof showAddTransaction === 'function');
+console.log('openModal:', typeof openModal === 'function');</code></pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Check Script Loading Order</h4>
+                    <p>In admin/index.html, scripts must load in this order:</p>
+                    <pre><code>&lt;script src="../js/app.js"&gt;&lt;/script&gt;        &lt;!-- Defines apiCall, openModal, formatKSh --&gt;
+&lt;script src="../js/transactions.js"&gt;&lt;/script&gt;  &lt;!-- Defines showAddTransaction --&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Permission/Authorization -->
+        <div class="section">
+            <h2><span class="icon">🔐</span> Category 4: Permission/Authorization (RBAC)</h2>
+            
+            <div class="category">
+                <h3>Role Verification <span class="badge">Session</span></h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Check Current User Role</h4>
+                    <pre><code>// In browser console:
+const user = JSON.parse(sessionStorage.getItem('currentUser'));
+console.log('Current user:', user);
+console.log('User role:', user?.role);
+
+// Expected for admin access: { name: "...", email: "admin@tristar.com", role: "admin" }
+// Expected for operator: { name: "...", email: "operator@tristar.com", role: "operator" }</code></pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Verify Admin-App Initialization</h4>
+                    <pre><code>// In admin/js/admin-app.js (line 4-17):
+document.addEventListener('DOMContentLoaded', function() {
+    const userStr = sessionStorage.getItem('currentUser');
+    if (!userStr) {
+        window.location.href = '../login.html';  // Redirects if not logged in
+        return;
+    }
+    
+    const user = JSON.parse(userStr);
+    if (user.role !== 'admin') {
+        window.location.href = '../login.html';  // Redirects if not admin
+        return;
+    }
+    // ...
+});</code></pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Check API Authorization</h4>
+                    <pre><code>// The transactions.php API does NOT have built-in authorization checks
+// Any authenticated user can create transactions
+// If you need to restrict by role, add to transactions.php:
+
+session_start();
+// if ($_SESSION['user_role'] !== 'admin') {
+//     http_response_code(403);
+//     echo json_encode(['success' => false, 'error' => 'Admin access required']);
+//     exit;
+// }</code></pre>
+                </div>
+            </div>
+
+            <div class="category warning">
+                <h3>Session Storage Issues <span class="badge">Browser</span></h3>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Verify Session Persistence</h4>
+                    <pre><code>// Check if sessionStorage persists:
+console.log('currentUser:', sessionStorage.getItem('currentUser'));
+
+// If null, user was not properly logged in
+// Clear and re-login:
+sessionStorage.clear();
+window.location.href = '../login.html';</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Comprehensive Testing Protocol -->
+        <div class="section">
+            <h2><span class="icon">✅</span> Comprehensive Button Testing Protocol</h2>
+            
+            <div class="test-protocol">
+                <h4>Admin Panel Button Tests</h4>
+                <div class="button-test">
+                    <div class="button-item">
+                        <span class="status" id="btn-add-transaction"></span>
+                        <span>Add Transaction</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-edit-transaction"></span>
+                        <span>Edit Transaction</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-delete-transaction"></span>
+                        <span>Delete Transaction</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-add-client"></span>
+                        <span>Add Client</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-add-vehicle"></span>
+                        <span>Add Vehicle</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-add-job"></span>
+                        <span>Add Job</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-add-inventory"></span>
+                        <span>Add Inventory</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-add-worker"></span>
+                        <span>Add Worker</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-protocol">
+                <h4>Operator Panel Button Tests</h4>
+                <div class="button-test">
+                    <div class="button-item">
+                        <span class="status" id="btn-op-add-client"></span>
+                        <span>Add Client</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-op-add-vehicle"></span>
+                        <span>Add Vehicle</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-op-add-transaction"></span>
+                        <span>Add Transaction</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-op-add-job"></span>
+                        <span>Add Job</span>
+                    </div>
+                    <div class="button-item">
+                        <span class="status" id="btn-op-add-inventory"></span>
+                        <span>Add Inventory</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-protocol">
+                <h4>Automated Button Test Script</h4>
+                <pre><code>// Run in browser console to test all buttons:
+function testAllButtons() {
+    const buttons = document.querySelectorAll('button, .btn, .action-btn, [onclick]');
+    const results = [];
+    
+    buttons.forEach((btn, i) => {
+        const test = {
+            index: i,
+            text: btn.textContent.trim().substring(0, 30),
+            hasClick: btn.onclick !== null || btn.getAttribute('onclick') !== null,
+            isDisabled: btn.disabled,
+            visible: btn.offsetParent !== null
+        };
+        results.push(test);
+        
+        // Visual feedback
+        if (test.hasClick && !test.isDisabled && test.visible) {
+            btn.style.outline = '2px solid #22c55e';
+        } else {
+            btn.style.outline = '2px solid #ef4444';
+        }
+    });
+    
+    console.table(results);
+    console.log(`Total buttons: ${buttons.length}`);
+    console.log(`Clickable: ${results.filter(r => r.hasClick && !r.isDisabled).length}`);
+    console.log(`Disabled: ${results.filter(r => r.isDisabled).length}`);
+    console.log(`Hidden: ${results.filter(r => !r.visible).length}`);
+    
+    // Remove outlines after 3 seconds
+    setTimeout(() => buttons.forEach(b => b.style.outline = ''), 3000);
+    
+    return results;
+}
+
+// Run the test
+testAllButtons();</code></pre>
+            </div>
+
+            <div class="test-protocol">
+                <h4>Modal Opening Test</h4>
+                <pre><code>// Test if modals open correctly:
+function testModals() {
+    const tests = [
+        { name: 'Add Transaction', fn: () => showAddTransaction() },
+        { name: 'Add Client', fn: () => showAddClient() },
+        { name: 'Add Vehicle', fn: () => showAddVehicleForClient(1) },
+        { name: 'Add Job', fn: () => showAddJob() },
+        { name: 'Add Inventory', fn: () => showAddInventory() },
+        { name: 'Add Worker', fn: () => showAddWorker() }
+    ];
+    
+    tests.forEach((test, i) => {
+        setTimeout(() => {
+            try {
+                test.fn();
+                console.log(`✓ ${test.name} modal opened`);
+            } catch (e) {
+                console.error(`✗ ${test.name} failed:`, e.message);
+            }
+        }, i * 1500);
+    });
+}
+
+// Run modal tests
+// testModals();</code></pre>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="section">
+            <h2><span class="icon">⚡</span> Quick Diagnostic Commands</h2>
+            
+            <div class="quick-actions">
+                <button class="btn btn-primary" onclick="runFullDiagnostic()">
+                    🔍 Run Full Diagnostic
+                </button>
+                <button class="btn btn-secondary" onclick="testApiEndpoint()">
+                    📡 Test API Endpoint
+                </button>
+                <button class="btn btn-secondary" onclick="checkDatabaseConnection()">
+                    🗄️ Check Database
+                </button>
+                <button class="btn btn-secondary" onclick="verifyUserSession()">
+                    🔐 Verify Session
+                </button>
+            </div>
+
+            <div id="diagnostic-output" style="margin-top: 16px; font-family: monospace; font-size: 0.85rem;"></div>
+        </div>
+
+        <div class="footer">
+            <p>Tristar Garage Management System · Debugging Guide v1.0</p>
+        </div>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const output = document.getElementById('diagnostic-output');
+            const colors = {
+                info: '#3b82f6',
+                success: '#22c55e',
+                warning: '#f97316',
+                error: '#ef4444'
+            };
+            output.innerHTML += `<div style="color: ${colors[type]}; margin: 4px 0;">${message}</div>`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        async function runFullDiagnostic() {
+            document.getElementById('diagnostic-output').innerHTML = '';
+            log('Starting full diagnostic...', 'info');
+
+            // Check functions
+            log('Checking JavaScript functions...', 'info');
+            const funcs = ['apiCall', 'formatKSh', 'showAddTransaction', 'openModal', 'loadTransactions'];
+            funcs.forEach(f => {
+                if (typeof window[f] === 'function') {
+                    log(`  ✓ ${f} is defined`, 'success');
+                } else {
+                    log(`  ✗ ${f} is NOT defined`, 'error');
+                }
+            });
+
+            // Check session
+            log('Checking user session...', 'info');
+            const userStr = sessionStorage.getItem('currentUser');
+            if (userStr) {
+                const user = JSON.parse(userStr);
+                log(`  ✓ Logged in as: ${user.email} (${user.role})`, 'success');
+            } else {
+                log('  ✗ No active session', 'warning');
+            }
+
+            // Test API
+            log('Testing API connection...', 'info');
+            try {
+                const response = await fetch('http://localhost/tristar-system/backend/api/transactions.php');
+                const data = await response.json();
+                if (data.success) {
+                    log(`  ✓ API connected. Found ${data.data.length} transactions`, 'success');
+                } else {
+                    log(`  ✗ API error: ${data.error}`, 'error');
+                }
+            } catch (e) {
+                log(`  ✗ API connection failed: ${e.message}`, 'error');
+            }
+
+            log('Diagnostic complete.', 'info');
+        }
+
+        async function testApiEndpoint() {
+            document.getElementById('diagnostic-output').innerHTML = '';
+            log('Testing POST to transactions.php...', 'info');
+
+            const testPayload = {
+                type: 'income',
+                category: 'Service',
+                amount: 999.99,
+                payment_method: 'cash',
+                description: 'Debug test transaction',
+                transaction_date: new Date().toISOString().split('T')[0]
+            };
+
+            log(`Payload: ${JSON.stringify(testPayload)}`, 'info');
+
+            try {
+                const response = await fetch('http://localhost/tristar-system/backend/api/transactions.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(testPayload)
+                });
+
+                log(`Response status: ${response.status}`, response.ok ? 'success' : 'error');
+
+                const data = await response.json();
+                log(`Response: ${JSON.stringify(data, null, 2)}`, data.success ? 'success' : 'error');
+
+                if (data.success) {
+                    log(`✓ Test transaction created with ID: ${data.id}`, 'success');
+                    log('Check database to verify insertion.', 'info');
+                }
+            } catch (e) {
+                log(`✗ Request failed: ${e.message}`, 'error');
+            }
+        }
+
+        async function checkDatabaseConnection() {
+            document.getElementById('diagnostic-output').innerHTML = '';
+            log('Checking database connection...', 'info');
+
+            try {
+                const response = await fetch('http://localhost/tristar-system/backend/api/dashboard.php');
+                const data = await response.json();
+
+                if (data.success) {
+                    log('✓ Database connection successful', 'success');
+                    log(`Stats: ${JSON.stringify(data.data, null, 2)}`, 'info');
+                } else {
+                    log(`✗ Database error: ${data.error}`, 'error');
+                }
+            } catch (e) {
+                log(`✗ Connection failed: ${e.message}`, 'error');
+                log('Check if MySQL is running in XAMPP', 'warning');
+            }
+        }
+
+        function verifyUserSession() {
+            document.getElementById('diagnostic-output').innerHTML = '';
+            log('Verifying user session...', 'info');
+
+            const userStr = sessionStorage.getItem('currentUser');
+            if (!userStr) {
+                log('✗ No session found. Please log in again.', 'error');
+                return;
+            }
+
+            try {
+                const user = JSON.parse(userStr);
+                log(`✓ Session valid`, 'success');
+                log(`  Name: ${user.name}`, 'info');
+                log(`  Email: ${user.email}`, 'info');
+                log(`  Role: ${user.role}`, 'info');
+
+                if (user.role === 'admin') {
+                    log('  ✓ Full admin access granted', 'success');
+                } else if (user.role === 'operator') {
+                    log('  ℹ Operator access (limited permissions)', 'info');
+                } else {
+                    log(`  ✗ Unknown role: ${user.role}`, 'error');
+                }
+            } catch (e) {
+                log('✗ Session data corrupted', 'error');
+                log('Clearing session...', 'warning');
+                sessionStorage.clear();
+            }
+        }
+    </script>
+</body>
+</html>

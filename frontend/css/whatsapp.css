@@ -1,0 +1,500 @@
+/* ===== WHATSAPP COMMUNICATION SYSTEM STYLES ===== */
+
+/* Dashboard Container */
+.wa-dashboard {
+    padding: 20px;
+}
+
+/* Stats Row */
+.wa-stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.wa-stat-card {
+    background: rgba(26, 35, 47, 0.6);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.wa-stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.wa-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.wa-stat-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.wa-stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f0f4fa;
+}
+
+.wa-stat-label {
+    font-size: 0.85rem;
+    color: #9aa9bb;
+}
+
+/* Chart Container */
+.wa-chart-container {
+    background: rgba(26, 35, 47, 0.6);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.wa-chart-container h4 {
+    margin-bottom: 20px;
+    color: #f0f4fa;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wa-chart-container h4 i {
+    color: #25d366;
+}
+
+.wa-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 150px;
+    gap: 12px;
+}
+
+.wa-chart-bar-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.wa-chart-bar {
+    width: 100%;
+    max-width: 40px;
+    background: linear-gradient(180deg, #25d366 0%, #128c7e 100%);
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 8px;
+    transition: height 0.3s ease;
+    min-height: 20px;
+}
+
+.wa-chart-value {
+    font-size: 0.75rem;
+    color: white;
+    font-weight: 600;
+}
+
+.wa-chart-label {
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: #9aa9bb;
+}
+
+/* History Table */
+.wa-history-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.wa-history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.wa-history-table th,
+.wa-history-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.wa-history-table th {
+    color: #9aa9bb;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.wa-history-table td {
+    color: #f0f4fa;
+    font-size: 0.9rem;
+}
+
+/* Badges */
+.wa-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.wa-badge-job_update { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+.wa-badge-appointment { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+.wa-badge-followup { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+.wa-badge-payment { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
+.wa-badge-promo { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+
+/* Status Indicators */
+.wa-status {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.wa-status-pending { background: rgba(156, 163, 175, 0.2); color: #9ca3af; }
+.wa-status-queued { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+.wa-status-sent { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+.wa-status-delivered { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+.wa-status-read { background: rgba(34, 197, 94, 0.3); color: #22c55e; }
+.wa-status-failed { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+.wa-status-default { background: rgba(156, 163, 175, 0.2); color: #9ca3af; }
+
+/* Compose Form */
+.wa-compose-form {
+    max-width: 500px;
+}
+
+.wa-compose-form .form-group {
+    margin-bottom: 16px;
+}
+
+.wa-compose-form label {
+    display: block;
+    margin-bottom: 6px;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.wa-compose-form .form-control {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(26, 35, 47, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #f0f4fa;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.wa-compose-form .form-control:focus {
+    outline: none;
+    border-color: #25d366;
+    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+}
+
+.wa-compose-form select.form-control {
+    cursor: pointer;
+}
+
+.wa-compose-form textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Opt-in Toggle */
+.wa-opt-in-toggle {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: rgba(156, 163, 175, 0.3);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.wa-opt-in-toggle:checked {
+    background: #25d366;
+}
+
+.wa-opt-in-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.wa-opt-in-toggle:checked::after {
+    transform: translateX(20px);
+}
+
+/* WhatsApp Button */
+.wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.wa-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.wa-btn i {
+    font-size: 1.1rem;
+}
+
+.wa-btn-sm {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+}
+
+/* Incoming Messages */
+.wa-inbox {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.wa-inbox-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s;
+}
+
+.wa-inbox-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.wa-inbox-item.unread {
+    background: rgba(37, 211, 102, 0.05);
+    border-left: 3px solid #25d366;
+}
+
+.wa-inbox-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.wa-inbox-content {
+    flex: 1;
+}
+
+.wa-inbox-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.wa-inbox-name {
+    font-weight: 500;
+    color: #f0f4fa;
+}
+
+.wa-inbox-time {
+    font-size: 0.75rem;
+    color: #9aa9bb;
+}
+
+.wa-inbox-message {
+    color: #9aa9bb;
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .wa-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .wa-chart {
+        height: 120px;
+    }
+    
+    .wa-stat-value {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .wa-stats-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Empty State */
+.wa-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6b7b8c;
+}
+
+.wa-empty-state i {
+    font-size: 2.5rem;
+    color: #25d366;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.wa-empty-state p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.wa-empty-state small {
+    color: #9aa9bb;
+    font-size: 0.8rem;
+}
+
+/* Message Log */
+.wa-message-log-container {
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 16px;
+}
+
+.wa-log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.wa-log-header h4 {
+    margin: 0;
+    color: #f0f4fa;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wa-log-header h4 i {
+    color: #25d366;
+}
+
+.wa-message-list {
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wa-message-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(26, 35, 47, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s;
+}
+
+.wa-message-item:hover {
+    background: rgba(26, 35, 50, 0.8);
+}
+
+.wa-message-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.wa-message-icon.wa-status-pending { background: rgba(156, 163, 175, 0.2); color: #9ca3af; }
+.wa-message-icon.wa-status-queued { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+.wa-message-icon.wa-status-sent { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+.wa-message-icon.wa-status-delivered { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+.wa-message-icon.wa-status-read { background: rgba(34, 197, 94, 0.3); color: #22c55e; }
+.wa-message-icon.wa-status-failed { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+.wa-message-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.wa-message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.wa-message-phone {
+    color: #f0f4fa;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.wa-message-time {
+    color: #9aa9bb;
+    font-size: 0.75rem;
+}
+
+.wa-message-type {
+    color: #9aa9bb;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+
+.wa-message-status {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 4px;
+}

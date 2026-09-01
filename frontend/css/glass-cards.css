@@ -1,0 +1,286 @@
+/* ===== GLASSMORPHIC STAT CARDS WITH SPARKLINES =====
+   Dark neutral theme with glassmorphism effects, glow animations,
+   and color-adaptive SVG sparklines */
+
+/* ===== STAT CARD BASE ===== */
+.glass-card {
+    position: relative;
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-accent);
+    box-shadow: var(--neu-raised);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 20px 20px 0 0;
+    opacity: 0.8;
+}
+
+.glass-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--neu-raised);
+}
+
+.glass-card:hover::after {
+    opacity: 0.08;
+}
+
+/* ===== CARD HEADER ===== */
+.glass-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.glass-card .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: var(--neu-button);
+    position: relative;
+    z-index: 1;
+}
+
+.glass-card .card-timestamp {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* ===== CARD METRICS ===== */
+.glass-card .card-primary {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+}
+
+.glass-card .card-secondary {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.glass-card .card-secondary .trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.glass-card .card-secondary .trend.up {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--accent-success);
+}
+
+.glass-card .card-secondary .trend.down {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--accent-danger);
+}
+
+/* ===== SPARKLINE ===== */
+.glass-card .card-sparkline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    opacity: 0.6;
+    overflow: hidden;
+}
+
+.glass-card .card-sparkline svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* ===== COLOR THEMES ===== */
+
+/* Gold/Primary Theme */
+.glass-card.gold::before {
+    background: linear-gradient(90deg, #fbbf24, #f59e0b);
+}
+.glass-card.gold .card-icon {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.1));
+    color: #fbbf24;
+}
+.glass-card.gold .card-primary { color: #fbbf24; }
+.glass-card.gold::after { background: radial-gradient(circle, #fbbf24 0%, transparent 70%); }
+.glass-card.gold .sparkline-fill { fill: url(#sparklineGold); }
+.glass-card.gold .sparkline-stroke { stroke: #fbbf24; }
+
+/* Blue Theme - Users */
+.glass-card.blue::before {
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+.glass-card.blue .card-icon {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.1));
+    color: #3b82f6;
+}
+.glass-card.blue .card-primary { color: #3b82f6; }
+.glass-card.blue::after { background: radial-gradient(circle, #3b82f6 0%, transparent 70%); }
+.glass-card.blue .sparkline-fill { fill: url(#sparklineBlue); }
+.glass-card.blue .sparkline-stroke { stroke: #3b82f6; }
+
+/* Purple Theme - Engagement */
+.glass-card.purple::before {
+    background: linear-gradient(90deg, #a855f7, #9333ea);
+}
+.glass-card.purple .card-icon {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(147, 51, 234, 0.1));
+    color: #a855f7;
+}
+.glass-card.purple .card-primary { color: #a855f7; }
+.glass-card.purple::after { background: radial-gradient(circle, #a855f7 0%, transparent 70%); }
+.glass-card.purple .sparkline-fill { fill: url(#sparklinePurple); }
+.glass-card.purple .sparkline-stroke { stroke: #a855f7; }
+
+/* Orange Theme - Growth */
+.glass-card.orange::before {
+    background: linear-gradient(90deg, #f97316, #ea580c);
+}
+.glass-card.orange .card-icon {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(234, 88, 12, 0.1));
+    color: #f97316;
+}
+.glass-card.orange .card-primary { color: #f97316; }
+.glass-card.orange::after { background: radial-gradient(circle, #f97316 0%, transparent 70%); }
+.glass-card.orange .sparkline-fill { fill: url(#sparklineOrange); }
+.glass-card.orange .sparkline-stroke { stroke: #f97316; }
+
+/* Green Theme - Success/Income */
+.glass-card.green::before {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+.glass-card.green .card-icon {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(22, 163, 74, 0.1));
+    color: #22c55e;
+}
+.glass-card.green .card-primary { color: #22c55e; }
+.glass-card.green::after { background: radial-gradient(circle, #22c55e 0%, transparent 70%); }
+.glass-card.green .sparkline-fill { fill: url(#sparklineGreen); }
+.glass-card.green .sparkline-stroke { stroke: #22c55e; }
+
+/* Red Theme - Expenses/Alert */
+.glass-card.red::before {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+.glass-card.red .card-icon {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.1));
+    color: #ef4444;
+}
+.glass-card.red .card-primary { color: #ef4444; }
+.glass-card.red::after { background: radial-gradient(circle, #ef4444 0%, transparent 70%); }
+.glass-card.red .sparkline-fill { fill: url(#sparklineRed); }
+.glass-card.red .sparkline-stroke { stroke: #ef4444; }
+
+/* Cyan Theme - Info */
+.glass-card.cyan::before {
+    background: linear-gradient(90deg, #06b6d4, #0891b2);
+}
+.glass-card.cyan .card-icon {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(8, 145, 178, 0.1));
+    color: #06b6d4;
+}
+.glass-card.cyan .card-primary { color: #06b6d4; }
+.glass-card.cyan::after { background: radial-gradient(circle, #06b6d4 0%, transparent 70%); }
+.glass-card.cyan .sparkline-fill { fill: url(#sparklineCyan); }
+.glass-card.cyan .sparkline-stroke { stroke: #06b6d4; }
+
+/* Pink Theme */
+.glass-card.pink::before {
+    background: linear-gradient(90deg, #ec4899, #db2777);
+}
+.glass-card.pink .card-icon {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(219, 39, 119, 0.1));
+    color: #ec4899;
+}
+.glass-card.pink .card-primary { color: #ec4899; }
+.glass-card.pink::after { background: radial-gradient(circle, #ec4899 0%, transparent 70%); }
+.glass-card.pink .sparkline-fill { fill: url(#sparklinePink); }
+.glass-card.pink .sparkline-stroke { stroke: #ec4899; }
+
+/* ===== LIGHT THEME ADJUSTMENTS ===== */
+[data-theme="light"] .glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+}
+
+[data-theme="light"] .glass-card:hover {
+    box-shadow: var(--neu-raised), 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .glass-card .card-sparkline {
+    opacity: 0.4;
+}
+
+/* ===== CARD GRID LAYOUT ===== */
+.glass-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+@media (max-width: 700px) {
+    .glass-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    .glass-card {
+        padding: 18px;
+    }
+    .glass-card .card-primary {
+        font-size: 1.6rem;
+    }
+    .glass-card .card-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .glass-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#e8edf2" media="(prefers-color-scheme: light)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Tristar Garage · Operator Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/neumorphic.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/loader.css">
+    <link rel="stylesheet" href="../css/uiverse-buttons.css">
+    <link rel="stylesheet" href="../css/animated-buttons.css">
+    <link rel="stylesheet" href="../css/whatsapp.css">
+    <link rel="stylesheet" href="../css/toggle-sections.css">
+    <link rel="stylesheet" href="../css/mobile-responsive.css">
+    <link rel="stylesheet" href="./css/operator.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="globalLoader">
+        <div class="loader-content">
+            <div class="tms-text">TMS</div>
+            <div class="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass" id="appContainer">
+        <!-- OPERATOR DASHBOARD -->
+        <div id="dashboardPage">
+            <!-- Header -->
+            <div class="dash-header">
+                <div>
+                    <h1><i class="fas fa-warehouse"></i> Tristar Garage</h1>
+                    <span class="date-display">
+                        <i class="fas fa-calendar-day"></i> 
+                        <span id="currentDate"></span>
+                    </span>
+                </div>
+                <div class="header-actions">
+                    <button class="toggle-all-btn" id="toggleAllSections" title="Toggle All Sections">
+                        <i class="fas fa-compress-alt"></i>
+                    </button>
+                    <button class="uiverse-btn" id="reportBtn" onclick="openOperatorReportModal()">
+                        <div class="uiverse-wrapper">
+                            <span><i class="fas fa-chart-bar"></i> Reports</span>
+                            <div class="uiverse-circle uiverse-circle-12"></div>
+                            <div class="uiverse-circle uiverse-circle-11"></div>
+                            <div class="uiverse-circle uiverse-circle-10"></div>
+                            <div class="uiverse-circle uiverse-circle-9"></div>
+                            <div class="uiverse-circle uiverse-circle-8"></div>
+                            <div class="uiverse-circle uiverse-circle-7"></div>
+                            <div class="uiverse-circle uiverse-circle-6"></div>
+                            <div class="uiverse-circle uiverse-circle-5"></div>
+                            <div class="uiverse-circle uiverse-circle-4"></div>
+                            <div class="uiverse-circle uiverse-circle-3"></div>
+                            <div class="uiverse-circle uiverse-circle-2"></div>
+                            <div class="uiverse-circle uiverse-circle-1"></div>
+                        </div>
+                    </button>
+                    <button class="uiverse-btn" id="invoiceBtn" onclick="openOperatorInvoiceModal()">
+                        <div class="uiverse-wrapper">
+                            <span><i class="fas fa-file-invoice"></i> Invoice</span>
+                            <div class="uiverse-circle uiverse-circle-12"></div>
+                            <div class="uiverse-circle uiverse-circle-11"></div>
+                            <div class="uiverse-circle uiverse-circle-10"></div>
+                            <div class="uiverse-circle uiverse-circle-9"></div>
+                            <div class="uiverse-circle uiverse-circle-8"></div>
+                            <div class="uiverse-circle uiverse-circle-7"></div>
+                            <div class="uiverse-circle uiverse-circle-6"></div>
+                            <div class="uiverse-circle uiverse-circle-5"></div>
+                            <div class="uiverse-circle uiverse-circle-4"></div>
+                            <div class="uiverse-circle uiverse-circle-3"></div>
+                            <div class="uiverse-circle uiverse-circle-2"></div>
+                            <div class="uiverse-circle uiverse-circle-1"></div>
+                        </div>
+                    </button>
+                    <span class="badge-role operator-badge">
+                        <i class="fas fa-user"></i> <span id="operatorName">Operator</span>
+                    </span>
+                    <button class="btn btn-sm btn-outline" id="logoutBtn">
+                        <i class="fas fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Today's Stats -->
+            <div class="section-header-with-toggle">
+                <h3 style="margin-bottom:0;"><i class="fas fa-chart-bar" style="color:#fbbf24;"></i> Today's Overview</h3>
+                <button class="section-toggle-btn" data-toggle-target="opStatsGrid" onclick="sectionToggle.toggle('opStatsGrid')">
+                    <i class="fas fa-chevron-down"></i> Stats
+                </button>
+            </div>
+            <div class="stats-grid-wrapper collapsible-section" id="opStatsGrid">
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <h4><i class="fas fa-user-plus"></i> TODAY'S CLIENTS</h4>
+                    <div class="value" id="statTodayClients">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4><i class="fas fa-car"></i> TODAY'S VEHICLES</h4>
+                    <div class="value" id="statTodayVehicles">0</div>
+                </div>
+                <div class="stat-card income">
+                    <h4><i class="fas fa-coins"></i> TODAY'S REVENUE</h4>
+                    <div class="value" id="statTodayRevenue">ksh0</div>
+                </div>
+                <div class="stat-card info">
+                    <h4><i class="fas fa-tasks"></i> TODAY'S JOBS</h4>
+                    <div class="value" id="statTodayJobs">0</div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Quick Action Buttons -->
+            <div class="section-header-with-toggle">
+                <h3 style="margin-bottom: 0;"><i class="fas fa-bolt"></i> Quick Actions</h3>
+                <button class="section-toggle-btn" data-toggle-target="quickActionsGroup" onclick="sectionToggle.toggle('quickActionsGroup')">
+                    <i class="fas fa-chevron-down"></i> Actions
+                </button>
+            </div>
+            <div class="quick-actions-wrapper collapsible-section" id="quickActionsWrapper">
+            <div class="action-button-group" id="quickActionsGroup">
+                    <button class="animated-action-btn btn-clients" onclick="openModal('clientModal')">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add Client</span>
+                    </button>
+                    <button class="animated-action-btn btn-vehicles" onclick="openModal('vehicleModal')">
+                        <i class="fas fa-car"></i>
+                        <span>Add Vehicle</span>
+                    </button>
+                    <button class="animated-action-btn btn-jobs" onclick="openModal('jobModal')">
+                        <i class="fas fa-wrench"></i>
+                        <span>New Job</span>
+                    </button>
+                    <button class="animated-action-btn btn-transactions" onclick="openModal('transactionModal')">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Add Transaction</span>
+                    </button>
+                    <button class="animated-action-btn btn-inventory" onclick="openModal('inventoryModal')">
+                        <i class="fas fa-box"></i>
+                        <span>Add Inventory</span>
+                    </button>
+                </div>
+            </div>
+            </div>
+
+            <!-- WhatsApp Quick Send -->
+            <div class="section-header-with-toggle">
+                <h3 style="margin-bottom: 0;"><i class="fab fa-whatsapp" style="color: #25d366;"></i> WhatsApp Quick Send</h3>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button class="section-toggle-btn" data-toggle-target="whatsappDashboardSection" onclick="sectionToggle.toggle('whatsappDashboardSection')">
+                        <i class="fas fa-chevron-down"></i> Messages
+                    </button>
+                    <button class="wa-btn wa-btn-sm" onclick="whatsappAdmin.openComposeModal()">
+                        <i class="fas fa-plus"></i> New Message
+                    </button>
+                </div>
+            </div>
+            <div class="wa-dashboard-container collapsible-section" id="whatsappDashboardSection">
+                <div id="whatsappDashboard">
+                    <div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+                </div>
+            </div>
+
+            <!-- Today's Data Tabs -->
+            <nav class="tab-nav-redesigned" aria-label="Today's data sections">
+                <button class="tab-nav-btn active" data-tab="tabTodayClients">
+                    <i class="fas fa-users"></i> Today's Clients
+                </button>
+                <button class="tab-nav-btn" data-tab="tabTodayVehicles">
+                    <i class="fas fa-car"></i> Today's Vehicles
+                </button>
+                <button class="tab-nav-btn" data-tab="tabTodayTransactions">
+                    <i class="fas fa-receipt"></i> Today's Transactions
+                </button>
+                <button class="tab-nav-btn" data-tab="tabTodayJobs">
+                    <i class="fas fa-tasks"></i> Today's Jobs
+                </button>
+                <button class="tab-nav-btn" data-tab="tabTodayInventory">
+                    <i class="fas fa-warehouse"></i> Today's Inventory
+                </button>
+            </nav>
+
+            <!-- Tab Contents -->
+            <section id="tabTodayClients" class="tab-content" role="tabpanel">
+                <div class="section-header-with-toggle">
+                    <div class="section-title" style="margin-bottom:0;">
+                        <i class="fas fa-user-friends"></i>
+                        <h2>Today's Clients</h2>
+                        <span class="badge-count" id="clientCount">0</span>
+                    </div>
+                    <button class="section-toggle-btn" data-toggle-target="todayClientsContainer" onclick="sectionToggle.toggle('todayClientsContainer')">
+                        <i class="fas fa-chevron-down"></i> Toggle
+                    </button>
+                </div>
+                <div id="todayClientsContainer" class="collapsible-section" aria-live="polite">
+                    <div class="loading">Loading today's clients...</div>
+                </div>
+            </section>
+
+            <section id="tabTodayVehicles" class="tab-content hidden" role="tabpanel">
+                <div class="section-header-with-toggle">
+                    <div class="section-title" style="margin-bottom:0;">
+                        <i class="fas fa-car"></i>
+                        <h2>Today's Vehicles</h2>
+                        <span class="badge-count" id="vehicleCount">0</span>
+                    </div>
+                    <button class="section-toggle-btn" data-toggle-target="todayVehiclesContainer" onclick="sectionToggle.toggle('todayVehiclesContainer')">
+                        <i class="fas fa-chevron-down"></i> Toggle
+                    </button>
+                </div>
+                <div id="todayVehiclesContainer" class="collapsible-section" aria-live="polite">
+                    <div class="loading">Loading today's vehicles...</div>
+                </div>
+            </section>
+
+            <section id="tabTodayTransactions" class="tab-content hidden" role="tabpanel">
+                <div class="section-header-with-toggle">
+                    <div class="section-title" style="margin-bottom:0;">
+                        <i class="fas fa-receipt"></i>
+                        <h2>Today's Transactions</h2>
+                        <span class="badge-count" id="transactionCount">0</span>
+                    </div>
+                    <button class="section-toggle-btn" data-toggle-target="todayTransactionsContainer" onclick="sectionToggle.toggle('todayTransactionsContainer')">
+                        <i class="fas fa-chevron-down"></i> Toggle
+                    </button>
+                </div>
+                <div id="todayTransactionsContainer" class="collapsible-section" aria-live="polite">
+                    <div class="loading">Loading today's transactions...</div>
+                </div>
+            </section>
+
+            <section id="tabTodayJobs" class="tab-content hidden" role="tabpanel">
+                <div class="section-header-with-toggle">
+                    <div class="section-title" style="margin-bottom:0;">
+                        <i class="fas fa-tasks"></i>
+                        <h2>Today's Jobs</h2>
+                        <span class="badge-count" id="jobCount">0</span>
+                    </div>
+                    <button class="section-toggle-btn" data-toggle-target="todayJobsContainer" onclick="sectionToggle.toggle('todayJobsContainer')">
+                        <i class="fas fa-chevron-down"></i> Toggle
+                    </button>
+                </div>
+                <div id="todayJobsContainer" class="collapsible-section" aria-live="polite">
+                    <div class="loading">Loading today's jobs...</div>
+                </div>
+            </section>
+
+            <section id="tabTodayInventory" class="tab-content hidden" role="tabpanel">
+                <div class="section-header-with-toggle">
+                    <div class="section-title" style="margin-bottom:0;">
+                        <i class="fas fa-warehouse"></i>
+                        <h2>Today's Inventory</h2>
+                        <span class="badge-count" id="inventoryCount">0</span>
+                    </div>
+                    <button class="section-toggle-btn" data-toggle-target="todayInventoryContainer" onclick="sectionToggle.toggle('todayInventoryContainer')">
+                        <i class="fas fa-chevron-down"></i> Toggle
+                    </button>
+                </div>
+                <div id="todayInventoryContainer" class="collapsible-section" aria-live="polite">
+                    <div class="loading">Loading today's inventory...</div>
+                </div>
+            </section>
+
+            <footer class="dashboard-footer">
+                <p><i class="fas fa-clock"></i> Showing data for today: <span id="todayDate"></span></p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ===== MODALS ===== -->
+
+    <!-- Add Client Modal -->
+    <div id="clientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> Add New Client</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <form id="addClientForm">
+                <div class="form-group">
+                    <label for="clientName">Full Name *</label>
+                    <input type="text" id="clientName" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone">Phone</label>
+                    <input type="text" id="clientPhone">
+                </div>
+                <div class="form-group">
+                    <label for="clientEmail">Email</label>
+                    <input type="email" id="clientEmail">
+                </div>
+                <div class="form-group">
+                    <label for="clientAddress">Address</label>
+                    <textarea id="clientAddress" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Save Client</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Vehicle Modal -->
+    <div id="vehicleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-car"></i> Add New Vehicle</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <form id="addVehicleForm">
+                <div class="form-group">
+                    <label for="vehicleClient">Client *</label>
+                    <select id="vehicleClient" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="vehicleMake">Make *</label>
+                    <input type="text" id="vehicleMake" required>
+                </div>
+                <div class="form-group">
+                    <label for="vehicleModel">Model *</label>
+                    <input type="text" id="vehicleModel" required>
+                </div>
+                <div class="form-group">
+                    <label for="vehicleYear">Year</label>
+                    <input type="number" id="vehicleYear" min="1900" max="2030">
+                </div>
+                <div class="form-group">
+                    <label for="vehiclePlate">Plate Number *</label>
+                    <input type="text" id="vehiclePlate" required>
+                </div>
+                <div class="form-group">
+                    <label for="vehicleColor">Color</label>
+                    <input type="text" id="vehicleColor">
+                </div>
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Save Vehicle</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Job Modal -->
+    <div id="jobModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-wrench"></i> New Repair Job</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <form id="addJobForm">
+                <div class="form-group">
+                    <label for="jobVehicle">Vehicle *</label>
+                    <select id="jobVehicle" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="jobDescription">Description *</label>
+                    <textarea id="jobDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="jobPriority">Priority</label>
+                    <select id="jobPriority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Create Job</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Transaction Modal -->
+    <div id="transactionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-money-bill-wave"></i> Add Transaction</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <form id="addTransactionForm">
+                <div class="form-group">
+                    <label for="transactionType">Type *</label>
+                    <select id="transactionType" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transactionCategory">Category *</label>
+                    <select id="transactionCategory" required>
+                        <option value="client_payment">Client Payment</option>
+                        <option value="staff_salary">Staff Salary</option>
+                        <option value="parts">Parts</option>
+                        <option value="maintenance">Maintenance</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transactionDescription">Description</label>
+                    <input type="text" id="transactionDescription">
+                </div>
+                <div class="form-group">
+                    <label for="transactionAmount">Amount *</label>
+                    <input type="number" id="transactionAmount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="transactionPaymentMethod">Payment Method</label>
+                    <select id="transactionPaymentMethod">
+                        <option value="cash">Cash</option>
+                        <option value="bank">Bank Transfer</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Save Transaction</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Inventory Modal -->
+    <div id="inventoryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-box"></i> Add Inventory Item</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <form id="addInventoryForm">
+                <div class="form-group">
+                    <label for="inventoryName">Item Name *</label>
+                    <input type="text" id="inventoryName" required>
+                </div>
+                <div class="form-group">
+                    <label for="inventoryCategory">Category</label>
+                    <select id="inventoryCategory"></select>
+                </div>
+                <div class="form-group">
+                    <label for="inventoryQuantity">Quantity *</label>
+                    <input type="number" id="inventoryQuantity" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="inventoryLocation">Location</label>
+                    <input type="text" id="inventoryLocation" placeholder="e.g., Shelf A2">
+                </div>
+                <div class="form-group">
+                    <label for="inventoryPrice">Unit Price</label>
+                    <input type="number" id="inventoryPrice" step="0.01" min="0">
+                </div>
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Save Item</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Operator JavaScript -->
+    <script src="../shared/js/theme.js"></script>
+    <script src="../shared/js/loader.js"></script>
+    <script src="../js/whatsapp.js"></script>
+    <script src="../js/toggle-sections.js"></script>
+    <script src="../js/mobile-enhancements.js"></script>
+    <script src="./js/operator-app.js"></script>
+    <script src="./js/operator-dashboard.js"></script>
+</body>
+</html>

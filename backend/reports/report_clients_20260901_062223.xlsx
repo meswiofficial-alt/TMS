@@ -1,0 +1,9 @@
+﻿=== Clients ===
+id	name	phone	email	created_at
+"1"	"Alice M."	"+1234567890"	"alice@email.com"	"2026-08-28 13:01:59"
+"2"	"Bob S."	"+1234567891"	"bob@email.com"	"2026-08-28 13:01:59"
+"3"	"Carol D."	"+1234567892"	"carol@email.com"	"2026-08-28 13:01:59"
+"5"	"melitono"	"07950566785"	"melitono@gmail.com"	"2026-08-31 17:07:05"
+"4"	"wekelome"	"0987546"	"wekelome@gmail.com"	"2026-08-31 10:15:44"
+
+
